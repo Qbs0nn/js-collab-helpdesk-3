@@ -10,7 +10,8 @@ export function addTicket(title,priority){
     
 }
 
-export function updateTicket(ticket,status){
-    tickets = [...ticket, status: status];
+export function updateTicket(tickets, id, status){
+    tickets.map(t =>(t.id === id) ? {...t, status} : t); 
+    
 }
 
