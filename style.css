@@ -1,0 +1,26 @@
+body{
+    backround-color: #8cbdb9;
+    color: darkslategrey;
+    font-family:sans-serif;
+}
+.dataEntry{
+    background-color: #e8eceb;
+    color: #2d3e4e;
+    font-family:sans-serif;
+}
+.taskList{
+    background-color: #2d3e4e;
+    color: #e8eceb;
+    font-family:sans-serif;
+}
+form{
+    font-family:sans-serif;
+    background-color: #e8eceb;
+    color:#2d3e4e;
+}
+.helpDesksubmit{
+    color: #e8eceb;
+    background-color:#2d3e4e;
+    font-family:sans-serif;
+    
+}
