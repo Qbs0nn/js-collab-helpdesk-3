@@ -5,18 +5,15 @@ const status = ["new","doing","done"];
 const priority = ["low","normal","high"];
 let newId = 1;
 export function addTicket(title,priority){
-    if(title.length < 3 || ticket.length > 80) {return false};
-    if(stauts !== "new" || status !== "doing" || status !== "done") {return false};
-    if(priority !=="low" || priority !=="normal" || priority !=="high") {return false};
-    title.trim();
+    
     return {id: newId, title: title, priority: priority, status: "new"}
     
 }
-
-export function updateTicket(id,title,priority,status) {
-    // znalezienie po id ticketa
+export function updateTicket(tickets, id, status){
+    tickets.map(t =>(t.id === id) ? {...t, status} : t); 
+    
 }
-export function filterTicket(tickets, statuts) {
+export function filterTicket(tickets, status) {
     if(status == 'all') return tickets;
     return tickets.filter(t => t.status === status);
 }
