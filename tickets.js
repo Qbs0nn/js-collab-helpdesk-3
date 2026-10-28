@@ -16,3 +16,7 @@ export function addTicket(title,priority){
 export function updateTicket(id,title,priority,status) {
     // znalezienie po id ticketa
 }
+export function filterTicket(tickets, statuts) {
+    if(status == 'all') return tickets;
+    return tickets.filter(t => t.status === status);
+}
