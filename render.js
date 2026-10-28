@@ -16,7 +16,7 @@ export function renderTickets(container, tickets) {
             opt.value = s
             opt.textContent = s
             opt.selected = s === t.status
-            select.appendChild(opt)s
+            select.appendChild(opt)
         }
 
         li.append(title, select)

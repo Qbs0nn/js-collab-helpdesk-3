@@ -7,21 +7,26 @@
     <title>Helpdesk</title>
 </head>
 <body>
-    <div class="dataEntry">
-        <form class="helpdeskForm">
+    <form class="helpdeskForm">
         <label for="helpdeskTitle">Nazwij pozycję: </label>
         <input type="text" id="helpdeskTitle" class="helpdeskTitle" name="helpdeskTitle">
         <label for="helpdeskPriority">Wybierz Priorytet: </label>
         <select id="helpdeskPriority" name="helpdeskPriority" class="helpdeskPriority">
-            <option value="priorityLow">Niski</option>
-            <option value="priorityMedium">Średni</option>
-            <option value="priorityHigh">Wysoki</option>
+            <option value="low">Niski</option>
+            <option value="medium">Średni</option>
+            <option value="high">Wysoki</option>
         </select>
-        <input type="submit" value="Potwierdź" onclick="" class="helpdeskSubmit" id="helpdeskSubmit" name="helpdeskSubmit">
-        </form>
-    </div>
-    <div class="taskList">
+        <button type="submit">Dodaj</button>
+    </form>
 
-    </div>
+    <select class="helpdeskFilter">
+        <option value="all">Wszystkie</option>
+        <option value="new">Nowe</option>
+        <option value="doing">W trakcie</option>
+        <option value="done">Zrobione</option>
+    </select>
+    <ul class="helpdeskList">
+
+    </ul>
 </body>
 </html>

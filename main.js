@@ -16,11 +16,9 @@ function rerender() {
 
 form.addEventListener("submit", e => {
     e.preventDefault()
-    try {
-        tickets = [...tickets, createTicket(titleInput.value, prioritySelect.value)]
-        form.reset()
-        rerender()
-    }
+    tickets = [...tickets, addTicket(titleInput.value, prioritySelect.value)]
+    form.reset()
+    rerender()
 })
 
 list.addEventListener("change", e => {
