@@ -1,5 +1,5 @@
 import { renderTickets } from './render.js'
-import { addTicket, updateTicket, filterTickets } from './tickets.js'
+import { addTicket, updateTicket, filterTicket } from './tickets.js'
 
 let tickets = []
 let currentFilter = 'all'
@@ -7,11 +7,11 @@ let currentFilter = 'all'
 const form = document.querySelector(".helpdeskForm")
 const titleInput = document.querySelector(".helpdeskTitle")
 const prioritySelect = document.querySelector(".helpdeskPriority")
-const filterSelect = document.querySelector(".helpDeskFilter")
+const filterSelect = document.querySelector(".helpdeskFilter")
 const list = document.querySelector(".helpdeskList")
 
 function rerender() {
-    renderTickets(list, filterTickets(tickets, currentFilter))
+    renderTickets(list, filterTicket(tickets, currentFilter))
 }
 
 form.addEventListener("submit", e => {
