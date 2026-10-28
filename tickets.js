@@ -13,6 +13,6 @@ export function addTicket(title,priority){
     
 }
 
-export function updateTicket(id,title,priority,status) {
-    // znalezienie po id ticketa
+export function updateTicket(tickets,id,title,priority,status) {
+    const ticket = tickets.find
 }

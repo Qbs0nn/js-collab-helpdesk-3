@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="main.js" defer></script>
-    <script src="render.js" defer></script>
-    <script src="tickets.js" defer></script>
-    <title>Document</title>
+    <title>Helpdesk</title>
 </head>
 <body>
-    
+    <div class="dataEntry">
+        <form class="helpdeskForm">
+        <label for="helpdeskTitle">Nazwij pozycję: </label>
+        <input type="text" id="helpdeskTitle" class="helpdeskTitle" name="helpdeskTitle">
+        <label for="helpdeskPriority">Wybierz Priorytet: </label>
+        <select id="helpdeskPriority" name="helpdeskPriority" class="helpdeskPriority">
+            <option value="priorityLow">Niski</option>
+            <option value="priorityMedium">Średni</option>
+            <option value="priorityHigh">Wysoki</option>
+        </select>
+        <input type="submit" value="Potwierdź" onclick="" class="helpdeskSubmit" id="helpdeskSubmit" name="helpdeskSubmit">
+        </form>
+    </div>
+    <div class="taskList">
+
+    </div>
 </body>
 </html>
