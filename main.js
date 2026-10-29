@@ -16,9 +16,13 @@ function rerender() {
 
 form.addEventListener("submit", e => {
     e.preventDefault()
-    tickets = [...tickets, addTicket(titleInput.value, prioritySelect.value)]
-    form.reset()
-    rerender()
+    if(titleInput.value == "")
+        alert("Nie mozna dodac pustego ticketu")
+    else {
+        tickets = [...tickets, addTicket(titleInput.value, prioritySelect.value)]
+        form.reset()
+        rerender()
+    }
 })
 
 list.addEventListener("change", e => {
