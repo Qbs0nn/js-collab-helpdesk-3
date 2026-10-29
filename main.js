@@ -16,17 +16,17 @@ function rerender() {
 
 form.addEventListener("submit", e => {
     e.preventDefault()
-    if(titleInput.value == "")
-        alert("Nie mozna dodac pustego ticketu")
-    else {
+    try {
         tickets = [...tickets, addTicket(titleInput.value, prioritySelect.value)]
         form.reset()
         rerender()
+    } catch (err) {
+        alert(err.message)
     }
 })
 
 list.addEventListener("change", e => {
-    const id = Number(e.target.closest('li').dataset.id)
+    const id = e.target.closest('li').dataset.id
     tickets = updateTicket(tickets, id, e.target.value)
     rerender()
 })

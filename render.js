@@ -7,7 +7,7 @@ export function renderTickets(container, tickets) {
         li.dataset.id = t.id
 
         const title = document.createElement("span")
-        title.textContent = `${t.title}`
+        title.textContent = `${t.title} [${t.priority}]`
 
         const select = document.createElement("select")
         select.className = 'status-select'
