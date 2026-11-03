@@ -16,7 +16,7 @@ Wszystkie statusy działaja. Mozna po nich sortowac, oraz wyswietlac wszystkie t
 Nie mozna dodawac ticketa o pustej nazwie.
 
 # TEKST HTML
-Dodawanie tekstu html dodaje go jako normlane znaki, np. zapisanie <h1>TEST</h1> wyswietli <h1>TEST</h1>
+Dodawanie tekstu html dodaje go jako normlane znaki, np. zapisanie `<h1>TEST</h1>` wyswietli `<h1>TEST</h1>`
 
 # DODAWANIE PRZEZ WCISNIECIE ENTER
 Tickety mozna dodawac poprzez wcisniecie ENTER.
