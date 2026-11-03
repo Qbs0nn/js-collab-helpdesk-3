@@ -6,7 +6,7 @@ const MAX_TICKETS = 1000
 export function addTicket(title,priority ) {
     if(title.length < 3 || title.length > 80)
         throw new Error("Tytul nie moze miec mnie niz 3 lub wiecej niz 80 znaków")
-    if(newId > 1000)
+    if(newId > MAX_TICKETS)
         throw new Error("Osiagnieto limit możliwych ticketów")
 
     const idS = String(newId++)
