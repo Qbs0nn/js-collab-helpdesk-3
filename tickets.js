@@ -1,6 +1,12 @@
-// addTicket(tickets, ticket)
-// updateTicket(tickets, STATUS)
-// filterTickets(tickets, STATUS)
+// trzeba usunac newID - nadpis danych przez import lub localStorage bedzie duplikowac ID
+// do funkcji addTicket dodajemy w parametrach tickets czyli (tickets, title, priority)
+// na poczatku funkcji let newId = 1, while(tickets.some(t => t.id === String(newId))) { newId++ }
+// te some() sprawdza czy istnieje juz ticket z podanym id. jesli istnieje to zwiekszamy licznik az znajdziemy jakies wolne id.
+
+// przez to trzeba bedzie zamienic sprawdzanie typu (newId > MAX_TICKETS) na (tickets.length >= MAX_TICKETS)
+// oraz const idS = String(newId) -> bez tego ++
+
+
 let newId = 1;
 const MAX_TICKETS = 1000
 export function addTicket(title,priority ) {
@@ -21,3 +27,14 @@ export function filterTicket(tickets, status) {
     if(status == 'all') return tickets;
     return tickets.filter(t => t.status === status);
 }
+
+// bedzie trzeba zrobic funckje do importowanie danych z JSON, walidacja danych itp. 
+// proponuje cos w stylu export function validateTickets(tickets) 
+// i sprawdzic: czy Json jest tablica, czy nie ma za duzo zgloszen (max tickets 1000), czy jest jakies nieprawidlowe zgloszenie, nieprawidlowe id, powtarzajace sie id
+// nieprawidlowy tytul, nieprawidlowy priorytet lub nieprawidlowy status.
+
+// wczesniej jedynie czy !Array.isArray(tickets) -> sprawdzic czy uzytkownik wgl podal prawidlowo tablice
+// to wszystko ofc wystarczy zrobic w loopie for (const t of tickets) { i jak uzytkownik wkleja ci tablice to masz t.id, t.title itp itd} 
+// do sprawdzenia powtarzajacego sie Id w importowanych danych zrobimy cos w stylu:
+//  const idS = new Set()
+// if(idS.has(t.id)) throw new Error() -> a jezeli nie ma to jest juz pewnie wszystko git (sprawdzmy to jako ostatnie) i wtedy mozemy zrobic idS.add(t.id)
