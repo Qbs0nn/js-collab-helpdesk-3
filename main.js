@@ -1,7 +1,7 @@
 import { renderTickets } from './render.js';
 import { addTicket, updateTicket, filterTicket } from './tickets.js';
 import { loadTickets, saveTickets } from './storage.js';
-import { importFromFile, importFromUrl } from './import.js';
+import { importFromCsvFile, importFromFile, importFromUrl } from './import.js';
 
 let tickets = [];
 let currentFilter = 'all';
@@ -21,6 +21,9 @@ const fileInput = document.querySelector('#importFile');
 const importFileBtn = document.querySelector('#importFileBtn');
 const urlInput = document.querySelector('#importUrl');
 const importUrlBtn = document.querySelector('#importUrlBtn');
+
+const csvImportFile = document.querySelector("#csvImportFile")
+const csvImportBtn = document.querySelector("#csvImportBtn")
 
 // funkcje od renderu i zapisu do localStorage
 function rerender() {
@@ -107,4 +110,13 @@ importUrlBtn.addEventListener('click', async () => {
     }
     await handleImport(() => importFromUrl(url));
 });
+
+csvImportBtn.addEventListener('click', async () => {
+    const file = csvImportFile.files[0]
+    if(!file) {
+        alert("Wybierz plik CSV")
+        return
+    }
+    handleImport(() => importFromCsvFile(file))
+})
 rerender();

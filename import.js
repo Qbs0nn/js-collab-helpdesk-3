@@ -29,6 +29,62 @@ export async function importFromUrl(url) {
 
     return tickets
 }
+
+function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let value = '';
+    let insideQuotes = false;
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+        if (char === '"') {
+            if (insideQuotes && nextChar === '"') {
+                value += '"';
+                i++;
+            } else 
+                insideQuotes = !insideQuotes;
+        } 
+        else if (char === ',' && !insideQuotes) {
+            row.push(value);
+            value = '';
+        } 
+        else if ((char === '\n' || char === '\r') && !insideQuotes) {
+            if (char === '\r' && nextChar === '\n')
+                i++;
+            row.push(value);
+            rows.push(row);
+            row = [];
+            value = '';
+        } 
+        else 
+            value += char;
+    }
+    if (value.length > 0 || row.length > 0) {
+        row.push(value);
+        rows.push(row);
+    }
+    const headers = rows.shift();
+    return rows
+        .filter(row => row.some(value => value.trim() !== ''))
+        .map(row => {
+            return Object.fromEntries(
+                headers.map((header, index) => [
+                    header.trim(),
+                    (row[index] ?? '').trim()
+                ])
+            );
+        });
+}
+// Import ticketów z pliku CSV
+export async function importFromCsvFile(file) {
+    if(!file)
+        throw new Error("Nie wybrano pliku")
+
+    const csvText = await file.text()
+    const importedTickets = parseCSV(csvText)
+    return importedTickets
+}
 // w tym pliku bedziemy robic import JSON z pliku i url
 // uzyjemy sobie tutaj async/await i Promise
 

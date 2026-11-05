@@ -1,9 +1,7 @@
-
 /* Basic reset */
 * {
     box-sizing: border-box;
 }
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -77,12 +75,14 @@ h2 {
 }
 
 #importFile,
-#importUrl {
+#importUrl,
+#csvImportFile {
     display: block;
     margin: 10px 0;
 }
 
 #importFileBtn,
-#importUrlBtn {
+#importUrlBtn,
+#csvImportBtn {
     margin-bottom: 10px;
 }
