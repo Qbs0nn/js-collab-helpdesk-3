@@ -1,6 +1,11 @@
 import { validateTickets } from './tickets.js'
 // Import ticketów z pliku JSON
 export async function importFromFile(file) {
+    if(!file)
+        throw new Error("Nie wybrano pliku")
+    if(!file.name.toLowerCase().endsWith('.json'))
+        throw new Error("Wybierz plik JSON")
+
     const text = await file.text()
     const tickets = JSON.parse(text)
 
@@ -11,7 +16,13 @@ export async function importFromFile(file) {
 
 // Import ticketów z adresu URL
 export async function importFromUrl(url) {
+    if(!url)
+        throw new Error("Nie podano adresu url")
+
     const response = await fetch(url)
+    if(!response.ok)
+        throw new Error(`Bład HTTP: ${response.status}`)
+
     const tickets = await response.json()
 
     validateTickets(tickets)
