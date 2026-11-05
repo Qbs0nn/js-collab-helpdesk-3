@@ -1,11 +1,18 @@
-// musimy zamienic w eventListener "submit" to jak dodajemy tickety na uzycie saveAndRender()
+
 import { renderTickets } from './render.js'
 import { addTicket, updateTicket, filterTicket } from './tickets.js'
 import { loadTickets, saveTickets } from './storage.js'
-import { importFromFile, importFromUrl } from './import.js'
+
+import {
+    importFromFile,
+    importFromUrl,
+    importFromCsv,
+    importFromXml
+} from './import.js'
 
 
 let tickets = []
+
 try {
     tickets = loadTickets()
 } catch (err) {
@@ -13,6 +20,8 @@ try {
 }
 
 let currentFilter = 'all'
+let importing = false
+
 
 const form = document.querySelector(".helpdeskForm")
 const titleInput = document.querySelector(".helpdeskTitle")
@@ -22,126 +31,174 @@ const list = document.querySelector(".helpdeskList")
 
 const fileInput = document.querySelector('#importFile')
 const importFileBtn = document.querySelector('#importFileBtn')
+
 const urlInput = document.querySelector('#importUrl')
 const importUrlBtn = document.querySelector('#importUrlBtn')
-let importing = false
+
+const csvInput = document.querySelector('#importCsv')
+const importCsvBtn = document.querySelector('#importCsvBtn')
+
+const xmlInput = document.querySelector('#importXml')
+const importXmlBtn = document.querySelector('#importXmlBtn')
 
 
+// Renderowanie
 function rerender() {
     renderTickets(list, filterTicket(tickets, currentFilter))
 }
+
+
+// Zapisywanie i renderowanie
 function saveAndRender(newTickets) {
     saveTickets(newTickets)
     tickets = newTickets
     rerender()
 }
 
+
+// Dodawanie ticketów
 form.addEventListener("submit", e => {
     e.preventDefault()
-if (importing) return
+
+    if (importing) return
+
     try {
-      saveAndRender([
-        ...tickets,
-    addTicket(titleInput.value, prioritySelect.value)
-])
-form.reset()
+        saveAndRender([
+            ...tickets,
+            addTicket(titleInput.value, prioritySelect.value)
+        ])
+
+        form.reset()
+
     } catch (err) {
         alert(err.message)
     }
 })
 
+
+// Zmiana statusu
 list.addEventListener("change", e => {
     if (importing) return
-    const id = e.target.closest('li').dataset.id
-    saveAndRender(updateTicket(tickets, id, e.target.value))
+
+    const li = e.target.closest('li')
+    if (!li) return
+
+    const id = li.dataset.id
+
+    try {
+        saveAndRender(updateTicket(tickets, id, e.target.value))
+    } catch (err) {
+        alert(err.message)
+        rerender()
+    }
 })
 
+
+// Wspólna funkcja importowania
 async function handleImport(loader) {
+    if (importing) return
+
     importing = true
 
-    // Blokujemy wszystkie kontrolki na czas importowania
-form.querySelectorAll('input, select, button').forEach(el => {
-    el.disabled = true
-})
+    const controls = [
+        ...form.querySelectorAll('input, select, button'),
+        ...list.querySelectorAll('select'),
+        fileInput,
+        importFileBtn,
+        urlInput,
+        importUrlBtn,
+        csvInput,
+        importCsvBtn,
+        xmlInput,
+        importXmlBtn
+    ]
 
-list.querySelectorAll('select').forEach(el => {
-    el.disabled = true
-})
+    const previousStates = controls.map(el => el.disabled)
 
-    fileInput.disabled = true
-    importFileBtn.disabled = true
-    urlInput.disabled = true
-    importUrlBtn.disabled = true
-
-try {
-    const importedTickets = await loader()
-
-if (!confirm('Czy chcesz zastąpić obecną listę ticketów?')) {
-    return
-    }
-
-    saveAndRender(importedTickets)
-
-} catch (err) {
-    alert(err.message)
-
-} finally {
-    importing = false
-
-        // Odblokowujemy kontrolki
-    form.querySelectorAll('input, select, button').forEach(el => {
-        el.disabled = false
+    controls.forEach(el => {
+        el.disabled = true
     })
 
-    list.querySelectorAll('select').forEach(el => {
-        el.disabled = false
-    })
+    try {
+        const importedTickets = await loader()
 
-    fileInput.disabled = false
-    importFileBtn.disabled = false
-    urlInput.disabled = false
-    importUrlBtn.disabled = false
+        if (!confirm('Czy chcesz zastąpić obecną listę ticketów?')) {
+            return
+        }
+
+        saveAndRender(importedTickets)
+
+    } catch (err) {
+        alert(err.message)
+
+    } finally {
+        importing = false
+
+        controls.forEach((el, index) => {
+            el.disabled = previousStates[index]
+        })
     }
 }
 
+
+// Filtrowanie
 filterSelect.addEventListener("change", e => {
     currentFilter = e.target.value
     rerender()
 })
 
-// jakas funkcja saveAndRender(noweTickety) { uzywa saveTickets(nowe bilety), tickety = nowe tickety, rerender() }
-rerender()
 
+// Import JSON
 importFileBtn.addEventListener('click', async () => {
-const file = fileInput.files[0]
+    const file = fileInput.files[0]
 
-if (!file) {
-    alert('Wybierz plik JSON')
-    return
-}
+    if (!file) {
+        alert('Wybierz plik JSON')
+        return
+    }
 
-await handleImport(() => importFromFile(file))
+    await handleImport(() => importFromFile(file))
 })
 
+
+// Import URL
 importUrlBtn.addEventListener('click', async () => {
-const url = urlInput.value.trim()
+    const url = urlInput.value.trim()
 
-if (!url) {
-    alert('Podaj adres URL')
-    return
-}
+    if (!url) {
+        alert('Podaj adres URL')
+        return
+    }
 
-await handleImport(() => importFromUrl(url))
+    await handleImport(() => importFromUrl(url))
 })
-// jak bedzie gotowy import.js to mozemy zrobic async function handleImport(loader)
-// wtedy importing = true
-// wtedy wylaczamy opcje uzywanie tych importFileBtn, importUrlBtn, fileInput, urlInput
-// form.querySelectorAll('input, select, button').forEach(el => el.disabled = true)
-// list.querySelectorAll('select').forEach(el => el.disabled = true)
-// w try { } const importedTickets = await loader(), if(!confirm('zastapic obecna liste?')) return, saveAndRender(importedTickets)
-// w catch { } jedynie error message
-// w finally { } importing = false, odblokowujemy wszystko to co zablokowalismy wczesniej
 
-// NA SAMYM KONCU
-// dodajemy eventListenery na te buttony nowe importfromfile i importfromurl
-// w listenerze formularza i zmiany statusu dodac if(importing) return
+
+// Import CSV
+importCsvBtn.addEventListener('click', async () => {
+    const file = csvInput.files[0]
+
+    if (!file) {
+        alert('Wybierz plik CSV')
+        return
+    }
+
+    await handleImport(() => importFromCsv(file))
+})
+
+
+// Import XML
+importXmlBtn.addEventListener('click', async () => {
+    const file = xmlInput.files[0]
+
+    if (!file) {
+        alert('Wybierz plik XML')
+        return
+    }
+
+    await handleImport(() => importFromXml(file))
+})
+
+
+// Pierwsze renderowanie
+rerender()
