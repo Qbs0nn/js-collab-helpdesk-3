@@ -26,3 +26,10 @@ Odswiezanie powoduje zresetowanie aplikacji 0 (Usuwa wczesniej dodane tickety.)
 
 # 1000/1001 ZGLOSZEN W PROBIE DOMENY
 W programie mozna umiescic maksymalnie 1000 ticketow. Przekroczenie tej ilosci powoduje wyskoczenie bledu.
+
+# importowanie JSON
+Walidacja programu nie pozwoli na dodanie ticketu z nieprawidłowym tytułem, priorytetem lub statusem. Nie zezwoli na niezgodne ID - lub powtarzające. 
+Import z URL oraz z pliku dokładnie sprawdza czy każdy z podanych ticketów jest obiektem oraz czy cały JSON jest tablicą. Każdy bład jest poprawnie wyrzucany do konsoli oraz opisany i nie pozwala on na dodanie źle zimportowanych ticketów do pliku. 
+
+# Pamięć lokalna
+Program korzysta z pamięci lokalnej przeglądarki, oznacza to, że odświeżenie nie resetuje stanów ticketów.

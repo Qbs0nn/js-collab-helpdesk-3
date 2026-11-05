@@ -8,16 +8,16 @@
 
 const MAX_TICKETS = 1000
 export function addTicket(tickets,title,priority ) {
+    console.log("tickets:", tickets);
+    console.log("Array?", Array.isArray(tickets));
+    console.log("Type:", typeof tickets);
     let newId = 1
     while(tickets.some(t => t.id === String(newId))) { newId++ }
     if(title.length < 3 || title.length > 80)
         throw new Error("Tytul nie moze miec mnie niz 3 lub wiecej niz 80 znaków")
-    if(tickets.length > MAX_TICKETS)
+    if(tickets.length >= MAX_TICKETS)
         throw new Error("Osiagnieto limit możliwych ticketów")
-
     const idS = String(newId)
-    if(idS.length === 0 ||  idS.length > 100)
-        throw new Error("ID musi mieć od 1 do 100 znaków")
     return { id: idS, title, priority, status: "new"}   
 }
 export function updateTicket(tickets, id, status) {
@@ -45,7 +45,7 @@ export function validateTickets(tickets) {
 
         idS.add(t.id)
 
-        if(t.title.trim().length < 3 || t.title.trim().length > 80 || typeof t.title !== 'string')
+        if(typeof t.title !== 'string' || t.title.trim().length < 3 || t.title.trim().length > 80)
             throw new Error("Chociaż jeden ticket ma nieprawidłowy tytuł")
         if(!['new', 'doing', 'done'].includes(t.status))
             throw new Error("Chociaż jeden ticket zawiera nieprawidłowy tytuł")
