@@ -35,19 +35,12 @@ function saveAndRender(newTickets) {
 // Listener na dodawanie ticketów
 form.addEventListener('submit', e => {
     e.preventDefault();
-
-    if (importing) return;
-
+    if (importing) 
+        return;
     try {
-        const newTicket = addTicket(
-            tickets,
-            titleInput.value,
-            prioritySelect.value
-        );
-
+        const newTicket = addTicket(tickets,titleInput.value,prioritySelect.value);
         saveAndRender([...tickets, newTicket]);
         form.reset();
-
     } catch (err) {
         alert(err.message);
     }
@@ -60,9 +53,7 @@ list.addEventListener('change', e => {
     if (!item) 
         return;
     const id = item.dataset.id;
-    saveAndRender(
-        updateTicket(tickets, id, e.target.value)
-    );
+    saveAndRender(updateTicket(tickets, id, e.target.value));
 });
 // Listener na filtrowanie ticketów
 filterSelect.addEventListener('change', e => {
@@ -74,11 +65,9 @@ function setImportingState(disabled) {
     form.querySelectorAll('input, select, button').forEach(el => {
         el.disabled = disabled;
     });
-
     list.querySelectorAll('select').forEach(el => {
         el.disabled = disabled;
     });
-
     fileInput.disabled = disabled;
     importFileBtn.disabled = disabled;
     urlInput.disabled = disabled;
