@@ -6,16 +6,16 @@
 // przez to trzeba bedzie zamienic sprawdzanie typu (newId > MAX_TICKETS) na (tickets.length >= MAX_TICKETS)
 // oraz const idS = String(newId) -> bez tego ++
 
-
-let newId = 1;
 const MAX_TICKETS = 1000
-export function addTicket(title,priority ) {
+export function addTicket(tickets,title,priority ) {
+    let newId = 1
+    while(tickets.some(t => t.id === String(newId))) { newId++ }
     if(title.length < 3 || title.length > 80)
         throw new Error("Tytul nie moze miec mnie niz 3 lub wiecej niz 80 znaków")
-    if(newId > MAX_TICKETS)
+    if(tickets.length > MAX_TICKETS)
         throw new Error("Osiagnieto limit możliwych ticketów")
 
-    const idS = String(newId++)
+    const idS = String(newId)
     if(idS.length === 0 ||  idS.length > 100)
         throw new Error("ID musi mieć od 1 do 100 znaków")
     return { id: idS, title, priority, status: "new"}   
@@ -26,6 +26,33 @@ export function updateTicket(tickets, id, status) {
 export function filterTicket(tickets, status) {
     if(status == 'all') return tickets;
     return tickets.filter(t => t.status === status);
+}
+export function validateTickets(tickets) {
+    if(!Array.isArray(tickets))
+        throw new Error("JSON nie jest tablicą")
+    if(tickets.length > MAX_TICKETS)
+        throw new Error("Próba dodania zbyt wielkiej ilośći ticketów")
+
+    const idS = new Set()
+
+    for(const t of tickets) {
+        if(!t || typeof t !== 'object' || Array.isArray(t))
+            throw new Error("Nieprawidłowe zgłoszenie")
+        if(typeof t.id !== 'string' || t.id.length < 1 || t.id.length > 100)
+            throw new Error("Nieprawidłowe ID")
+        if(idS.has(t.id))
+            throw new Error("Powtarzające się ID")
+
+        idS.add(t.id)
+
+        if(t.title.trim().length < 3 || t.title.trim().length > 80 || typeof t.title !== 'string')
+            throw new Error("Chociaż jeden ticket ma nieprawidłowy tytuł")
+        if(!['new', 'doing', 'done'].includes(t.status))
+            throw new Error("Chociaż jeden ticket zawiera nieprawidłowy tytuł")
+        if(!['low', 'medium', 'high'].includes(t.priority))
+            throw new Error("Chociaż jeden ticket zawiera nieprawidłowy priorytet")
+    }
+    return true
 }
 
 // bedzie trzeba zrobic funckje do importowanie danych z JSON, walidacja danych itp. 
