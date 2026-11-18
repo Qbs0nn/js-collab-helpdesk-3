@@ -1,0 +1,12 @@
+id,title,priority,status
+1,Fix login page styling,high,new
+2,Update dashboard layout,medium,doing
+3,Add dark mode support,low,done
+4,"Fix navigation, menu and sidebar",high,doing
+5,"Improve ""Save"" button functionality",medium,new
+6,"Fix login page,
+especially on mobile",high,new
+7,Implement CSV import,high,done
+8,Update user profile,low,new
+9,"Fix search, filters and sorting",medium,doing
+10,Improve application performance,high,done

@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "title": "Fix login page styling",
+        "priority": "high",
+        "status": "new"
+    },
+    {
+        "id": "2",
+        "title": "Update dashboard layout",
+        "priority": "medium",
+        "status": "doig"
+    },
+    {
+        "id": "3",
+        "title": "Add dark mode support",
+        "priority": "low",
+        "status": "done"
+    },
+    {
+        "id": "4",
+        "title": "Fix navigation menu",
+        "priority": "high",
+        "status": "doing"
+    },
+    {
+        "id": "5",
+        "title": "Improve application performance",
+        "priority": "medium",
+        "status": "new"
+    },
+    {
+        "id": "10",
+        "title": "Implement JSON import functionality",
+        "priority": "high",
+        "status": "done"
+    }
+]
