@@ -18,9 +18,9 @@ body {
     gap: 16px;
     max-width: 420px;
     background-color: #eee3d2;
-    padding: 26px;
+    padding: 32px;
     border: 1px solid #cbbb9f;
-    border-radius: 5px;
+    border-radius: 16px;
 }
 
 label {
@@ -33,10 +33,10 @@ input,
 select,
 button {
     font-family: Arial, sans-serif;
-    font-size: 14px;
-    padding: 11px 12px;
+    font-size: 16px;
+    padding: 16px 16px;
     border: 1px solid #c8b79f;
-    border-radius: 4px;
+    border-radius: 16px;
     outline: none;
 }
 
@@ -57,10 +57,10 @@ button {
     color: #fff5e8;
     border: 1px solid #8b5e46;
     cursor: pointer;
-    padding: 11px 16px;
+    padding: 16px 16px;
     font-weight: 600;
-    border-radius: 4px;
-    transition: background-color 0.15s ease;
+    border-radius: 24px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -95,12 +95,12 @@ button:active {
 }
 
 h2 {
-    margin-top: 34px;
+    margin-top: 16px;
     margin-bottom: 16px;
     font-family: Georgia, 'Times New Roman', serif;
-    font-size: 22px;
-    font-weight: normal;
-    color: #d2a77e;
+    font-size: 32px;
+    font-weight: bold;
+    color: #eeba89;
 }
 
 #importFile,
@@ -112,7 +112,7 @@ h2 {
     background-color: #eee3d2;
     color: #403027;
     border: 1px solid #c8b79f;
-    border-radius: 4px;
+    border-radius: 16px;
     max-width: 420px;
     width: 100%;
 }
@@ -130,7 +130,7 @@ input[type="file"]::file-selector-button {
     border: none;
     padding: 8px 11px;
     margin-right: 10px;
-    border-radius: 3px;
+    border-radius: 16px;
     cursor: pointer;
 }
 
