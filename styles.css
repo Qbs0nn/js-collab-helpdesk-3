@@ -4,7 +4,7 @@
 
 body {
     font-family: Georgia, 'Times New Roman', serif;
-    background-color: #30251f;
+    background-color: #2c211c;
     color: #e9ddcc;
     margin: 0;
     padding: 40px;
@@ -19,13 +19,12 @@ body {
     max-width: 420px;
     background-color: #eee3d2;
     padding: 32px;
-    border: 1px solid #cbbb9f;
     border-radius: 16px;
 }
 
 label {
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: bold;
+    font-size: 16px;
     color: #49362b;
 }
 
@@ -55,20 +54,21 @@ select:focus {
 button {
     background-color: #8b5e46;
     color: #fff5e8;
-    border: 1px solid #8b5e46;
+    border: 2px solid #8b5e46;
     cursor: pointer;
-    padding: 16px 16px;
+    padding: 10px 16px;
     font-weight: 600;
     border-radius: 24px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease-in-out;
 }
 
 button:hover {
-    background-color: #704832;
+    background-color: #583a2a;
 }
 
 button:active {
-    background-color: #593b2c;
+    background-color: #251812;
+    scale: 0.97;
 }
 
 .helpdeskFilter {
@@ -79,7 +79,7 @@ button:active {
 
 .helpdeskList {
     list-style: none;
-    padding: 0;
+    padding: 12px;
     max-width: 650px;
     margin-top: 18px;
 }
@@ -88,10 +88,19 @@ button:active {
     background-color: #eee3d2;
     color: #403027;
     border: 1px solid #cbbb9f;
-    border-left: 4px solid #a47758;
-    border-radius: 4px;
-    padding: 18px;
+    border-left: 4px solid #63402a;
+    border-radius: 8px;
+    padding: 10px 16px;
     margin-bottom: 12px;
+}
+
+.helpdeskList li span {
+    margin-right: 16px;
+}
+
+.status-select {
+    padding: 16px;
+    padding-right: 32px
 }
 
 h2 {
@@ -107,8 +116,8 @@ h2 {
 #importUrl,
 #csvImportFile {
     display: block;
-    margin: 10px 0;
-    padding: 11px;
+    margin: 10px;
+    padding: 16px;
     background-color: #eee3d2;
     color: #403027;
     border: 1px solid #c8b79f;
@@ -130,7 +139,7 @@ input[type="file"]::file-selector-button {
     border: none;
     padding: 8px 11px;
     margin-right: 10px;
-    border-radius: 16px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
