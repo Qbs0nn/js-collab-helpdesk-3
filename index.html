@@ -1,44 +1,103 @@
+
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="./dist/main.js"></script>
+
     <link rel="stylesheet" href="styles.css">
-    <title>Helpdesk</title>
+    <script type="module" src="./dist/main.js"></script>
+
+    <title>Helpdesk — Ticket Manager</title>
 </head>
 <body>
-    <form class="helpdeskForm">
-        <label for="helpdeskTitle">Name your ticket: </label>
-        <input type="text" id="helpdeskTitle" class="helpdeskTitle" name="helpdeskTitle">
-        <label for="helpdeskPriority">Choose priority: </label>
-        <select id="helpdeskPriority" name="helpdeskPriority" class="helpdeskPriority">
-            <option value="low">low</option>
-            <option value="medium">medium</option>
-            <option value="high">high</option>
-        </select>
-        <button type="submit">add</button>
-    </form>
-
-    <select class="helpdeskFilter">
-        <option value="all">all</option>
-        <option value="new">new</option>
-        <option value="doing">doing</option>
-        <option value="done">done</option>
-    </select>
-    <ul class="helpdeskList">
-
-    </ul>
-
-    <h2>Import JSON</h2>
-    <input type="file" id="importFile" accept=".json">
-    <button type="button" id="importFileBtn">Importuj plik</button>
-
-    <input type="url" id="importUrl" placeholder="Adres JSON">
-    <button type="button" id="importUrlBtn">Importuj URL</button>
-
-    <h2>Import CSV</h2>
-    <input type="file" id="csvImportFile" accept=".csv">
-    <button type="button" id="csvImportBtn">Importuj plik</button>
+    <main class="app">
+        <header class="appHeader">
+            <div class="brand">
+                <span class="brandMark">h.</span>
+                <span>helpdesk</span>
+            </div>
+            <span class="headerNote">TICKET MANAGEMENT</span>
+        </header>
+        <section class="welcome">
+            <h1>Your workspace.</h1>
+            <p>Keep track of things that need your attention.</p>
+        </section>
+        <section class="createSection">
+            <div class="sectionHeading">
+                <h2>Create a ticket</h2>
+                <span class="sectionNumber">01</span>
+            </div>
+            <form class="helpdeskForm">
+                <div class="formField titleField">
+                    <label for="helpdeskTitle">Ticket name</label>
+                    <input
+                        type="text"
+                        id="helpdeskTitle"
+                        class="helpdeskTitle"
+                        name="helpdeskTitle"
+                        placeholder="What needs to be done?"
+                    >
+                </div>
+                <div class="formField priorityField">
+                    <label for="helpdeskPriority">Priority</label>
+                    <select
+                        id="helpdeskPriority"
+                        name="helpdeskPriority"
+                        class="helpdeskPriority"
+                    >
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit" class="addButton">
+                    Add ticket <span>+</span>
+                </button>
+            </form>
+        </section>
+        <section class="ticketsSection">
+            <div class="sectionHeading">
+                <h2>Your tickets</h2>
+                <span class="sectionNumber">02</span>
+            </div>
+            <div class="filterWrapper">
+                <span class="filterLabel">SHOW</span>
+                <select class="helpdeskFilter">
+                    <option value="all">All tickets</option>
+                    <option value="new">New</option>
+                    <option value="doing">In progress</option>
+                    <option value="done">Completed</option>
+                </select>
+            </div>
+            <ul class="helpdeskList"></ul>
+        </section>
+        <section class="importSection">
+            <div class="sectionHeading">
+                <h2>Import data</h2>
+                <span class="sectionNumber">03</span>
+            </div>
+            <div class="importTools">
+                <div class="importTool">
+                    <span class="importType">JSON</span>
+                    <input type="file" id="importFile" accept=".json">
+                    <button type="button" id="importFileBtn">Import file</button>
+                </div>
+                <div class="importTool importUrlTool">
+                    <input type="url" id="importUrl" placeholder="Paste JSON URL...">
+                    <button type="button" id="importUrlBtn">Import URL</button>
+                </div>
+                <div class="importTool">
+                    <span class="importType">CSV</span>
+                    <input type="file" id="csvImportFile" accept=".csv">
+                    <button type="button" id="csvImportBtn">Import file</button>
+                </div>
+            </div>
+        </section>
+        <footer class="appFooter">
+            <span>HELPDESK</span>
+            <span>Keep things moving.</span>
+        </footer>
+    </main>
 </body>
 </html>

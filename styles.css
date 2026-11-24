@@ -1,168 +1,754 @@
+
+/* ========================================
+   FONTS
+======================================== */
+
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800&display=swap');
+
+
+/* ========================================
+   VARIABLES
+======================================== */
+
+:root {
+    --background: #F2EFE5;
+    --surface: #FAF9F3;
+    --surface-dark: #E9E6D9;
+
+    --matcha: #849477;
+    --matcha-dark: #647456;
+    --matcha-light: #E4E9DD;
+
+    --text: #34392F;
+    --text-muted: #858779;
+
+    --border: #E3E0D4;
+    --white: #FFFFFF;
+
+    --radius: 12px;
+    --radius-large: 18px;
+
+    --priority-low-bg: #E4E9DD;
+    --priority-low-text: #647456;
+
+    --priority-medium-bg: #F2E9D5;
+    --priority-medium-text: #98743C;
+
+    --priority-high-bg: #F2E2DC;
+    --priority-high-text: #A45F4E;
+}
+
+
+/* ========================================
+   RESET & GLOBAL
+======================================== */
+
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: Georgia, 'Times New Roman', serif;
-    background-color: #2c211c;
-    color: #e9ddcc;
-    margin: 0;
-    padding: 40px;
+    background: var(--background);
+    color: var(--text);
+
+    font-family: 'Satoshi', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+
     min-height: 100vh;
+    padding: 60px 24px;
 }
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* ========================================
+   MAIN CONTAINER
+======================================== */
+
+.app {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.appHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.7px;
+}
+
+.brandMark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 10px;
+
+    background: var(--matcha);
+    color: var(--white);
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.headerNote {
+    color: var(--text-muted);
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+
+/* ========================================
+   SECTIONS
+======================================== */
+
+.createSection,
+.ticketsSection,
+.importSection {
+    margin-bottom: 46px;
+}
+
+.createSection {
+    margin-top: 42px;
+}
+
+.sectionHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.sectionHeading h2 {
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.sectionNumber {
+    color: var(--matcha-dark);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   FORM
+======================================== */
 
 .helpdeskForm {
-    color: #403027;
+    display: grid;
+    grid-template-columns: 1fr 160px auto;
+    align-items: end;
+    gap: 14px;
+}
+
+.formField {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 420px;
-    background-color: #eee3d2;
-    padding: 32px;
-    border-radius: 16px;
+    gap: 8px;
 }
 
-label {
-    font-weight: bold;
-    font-size: 16px;
-    color: #49362b;
+.formField label {
+    color: var(--text-muted);
+
+    font-size: 12px;
+    font-weight: 700;
 }
 
-input,
-select,
-button {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    padding: 16px 16px;
-    border: 1px solid #c8b79f;
-    border-radius: 16px;
-    outline: none;
-}
+
+/* ========================================
+   INPUTS
+======================================== */
 
 input,
 select {
-    background-color: #f8f2e8;
-    color: #403027;
+    width: 100%;
+    min-width: 0;
+    height: 46px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--surface);
+    color: var(--text);
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease-in-out,
+        background-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
 }
 
-input:focus,
-select:focus {
-    border-color: #a36e4f;
-    background-color: #fffaf1;
+input::placeholder {
+    color: #AAA99D;
 }
 
-button {
-    background-color: #8b5e46;
-    color: #fff5e8;
-    border: 2px solid #8b5e46;
+input:focus {
+    border-color: var(--matcha);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(132, 148, 119, 0.12);
+}
+
+
+/* ========================================
+   CUSTOM SELECTS
+======================================== */
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    padding: 0 40px 0 14px;
+
+    background-color: var(--surface);
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23647456' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 14px;
+
     cursor: pointer;
-    padding: 10px 16px;
-    font-weight: 600;
-    border-radius: 24px;
-    transition: background-color 0.3s ease-in-out;
+
+    transition:
+        border-color 0.2s ease-in-out,
+        background-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
 }
 
-button:hover {
-    background-color: #583a2a;
+select:hover {
+    border-color: #B7C1AA;
 }
 
-button:active {
-    background-color: #251812;
-    scale: 0.97;
+select:focus {
+    border-color: var(--matcha);
+    background-color: var(--white);
+    box-shadow: 0 0 0 3px rgba(132, 148, 119, 0.12);
+}
+
+select option {
+    background: var(--surface);
+    color: var(--text);
+    font-family: 'Satoshi', sans-serif;
+}
+
+
+/* ========================================
+   MAIN BUTTON
+======================================== */
+
+.addButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    height: 46px;
+    padding: 0 19px;
+
+    border: none;
+    border-radius: var(--radius);
+
+    background: var(--matcha-dark);
+    color: var(--white);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition: background 0.2s ease-in-out;
+}
+
+.addButton:hover {
+    background: #505F45;
+}
+
+.addButton span {
+    font-size: 19px;
+    font-weight: 400;
+}
+
+
+/* ========================================
+   TICKET FILTER
+======================================== */
+
+.filterWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.filterLabel {
+    color: var(--text-muted);
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
 }
 
 .helpdeskFilter {
-    margin-top: 24px;
-    min-width: 180px;
-    max-width: 250px;
+    width: auto;
+    min-width: 155px;
+    height: 40px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 600;
 }
+
+.helpdeskPriority {
+    height: 46px;
+    border-radius: var(--radius);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* ========================================
+   TICKET CARDS
+======================================== */
 
 .helpdeskList {
     list-style: none;
-    padding: 12px;
-    max-width: 650px;
-    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .helpdeskList li {
-    background-color: #eee3d2;
-    color: #403027;
-    border: 1px solid #cbbb9f;
-    border-left: 4px solid #63402a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+
+    min-width: 0;
+    padding: 18px 20px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    box-shadow: 0 2px 5px rgba(52, 57, 47, 0.025);
+
+    transition:
+        border-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
+}
+
+.helpdeskList li:hover {
+    border-color: #B7C1AA;
+    box-shadow: 0 3px 12px rgba(52, 57, 47, 0.045);
+}
+
+
+/* ========================================
+   TICKET TITLES
+======================================== */
+
+.helpdeskList li .ticketTitle {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+
+    min-width: 0;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+
+    font-size: 14px;
+    line-height: 1.45;
+    font-weight: 700;
+
+    color: var(--text);
+}
+
+
+/* ========================================
+   PRIORITY BADGES
+======================================== */
+
+.priorityBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    width: fit-content;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.priorityBadge.low {
+    color: var(--priority-low-text);
+    background: var(--priority-low-bg);
+}
+
+.priorityBadge.medium {
+    color: var(--priority-medium-text);
+    background: var(--priority-medium-bg);
+}
+
+.priorityBadge.high {
+    color: var(--priority-high-text);
+    background: var(--priority-high-bg);
+}
+
+
+/* ========================================
+   TICKET ACTION BUTTONS
+======================================== */
+
+.helpdeskList button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 34px;
+    padding: 0 12px;
+
+    border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 10px 16px;
-    margin-bottom: 12px;
+
+    background: var(--surface-dark);
+    color: var(--text);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease-in-out,
+        border-color 0.2s ease-in-out;
 }
 
-.helpdeskList li span {
-    margin-right: 16px;
+.helpdeskList button:hover {
+    background: var(--matcha-light);
+    border-color: var(--matcha);
 }
 
-.status-select {
-    padding: 16px;
-    padding-right: 32px
+
+/* ========================================
+   COMPACT IMPORT SECTION
+======================================== */
+
+.importTools {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-h2 {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 32px;
-    font-weight: bold;
-    color: #eeba89;
+.importTool {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+    padding: 10px 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: var(--surface);
 }
 
-#importFile,
-#importUrl,
-#csvImportFile {
-    display: block;
-    margin: 10px;
-    padding: 16px;
-    background-color: #eee3d2;
-    color: #403027;
-    border: 1px solid #c8b79f;
-    border-radius: 16px;
-    max-width: 420px;
-    width: 100%;
+
+/* ========================================
+   IMPORT TYPE LABELS
+======================================== */
+
+.importType {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+    min-width: 43px;
+    height: 29px;
+
+    border-radius: 6px;
+
+    background: var(--matcha-light);
+    color: var(--matcha-dark);
+
+    font-size: 10px;
+    font-weight: 800;
 }
 
-#importFileBtn,
-#importUrlBtn,
-#csvImportBtn {
-    margin-bottom: 10px;
-    min-width: 130px;
+
+/* ========================================
+   FILE INPUTS
+======================================== */
+
+.importTool input {
+    flex: 1;
+    min-width: 0;
+    height: 38px;
+
+    padding: 0;
+
+    font-size: 12px;
 }
 
-input[type="file"]::file-selector-button {
-    background-color: #dfcfb9;
-    color: #49362b;
+.importTool input[type="file"] {
     border: none;
-    padding: 8px 11px;
-    margin-right: 10px;
+    background: transparent;
+
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 12px;
+}
+
+
+/* ========================================
+   CUSTOM FILE PICKER BUTTON
+======================================== */
+
+.importTool input[type="file"]::file-selector-button {
+    height: 34px;
+    padding: 0 13px;
+    margin-right: 12px;
+
+    border: 1px solid #D5DCCB;
     border-radius: 8px;
+
+    background: var(--matcha-light);
+    color: var(--matcha-dark);
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+
     cursor: pointer;
+
+    transition:
+        background 0.2s ease-in-out,
+        border-color 0.2s ease-in-out;
 }
 
-input[type="file"]::file-selector-button:hover {
-    background-color: #d1bda3;
+.importTool input[type="file"]::file-selector-button:hover {
+    background: #D9E2D0;
+    border-color: var(--matcha);
 }
 
-@media (max-width: 600px) {
+
+/* ========================================
+   IMPORT ACTION BUTTONS
+======================================== */
+
+.importTool button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 116px;
+    min-width: 116px;
+    height: 38px;
+
+    padding: 0 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--matcha-dark);
+    color: var(--white);
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition: background 0.2s ease-in-out;
+}
+
+.importTool button:hover {
+    background: #505F45;
+}
+
+
+/* ========================================
+   URL IMPORT
+======================================== */
+
+.importUrlTool input {
+    height: 38px;
+    padding: 0 12px;
+
+    border: 1px solid transparent;
+    background: transparent;
+}
+
+.importUrlTool input:focus {
+    background: var(--white);
+    border-color: var(--matcha);
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.appFooter {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 22px 0;
+    margin-top: 15px;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.appFooter span:last-child {
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+
+/* ========================================
+   RESPONSIVE: TABLET
+======================================== */
+
+@media (max-width: 650px) {
     body {
-        padding: 20px 15px;
+        padding: 30px 18px;
+    }
+
+    .createSection {
+        margin-top: 32px;
     }
 
     .helpdeskForm {
-        max-width: 100%;
-        padding: 21px;
+        grid-template-columns: 1fr 1fr;
     }
 
-    .helpdeskFilter {
-        max-width: 100%;
+    .titleField {
+        grid-column: 1 / -1;
+    }
+
+    .addButton {
+        width: 100%;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE: MOBILE
+======================================== */
+
+@media (max-width: 500px) {
+    .importTool {
+        flex-wrap: wrap;
+    }
+
+    .importTool button {
+        width: 104px;
+        min-width: 104px;
+    }
+
+    .importTool input[type="file"] {
+        font-size: 10px;
+    }
+
+    .helpdeskList li {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .helpdeskList li .ticketTitle {
+        font-size: 13px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE: SMALL MOBILE
+======================================== */
+
+@media (max-width: 400px) {
+    .helpdeskForm {
+        grid-template-columns: 1fr;
+    }
+
+    .titleField {
+        grid-column: auto;
+    }
+
+    .addButton {
         width: 100%;
     }
 
-    .helpdeskList {
-        max-width: 100%;
+    .headerNote {
+        font-size: 8px;
     }
-}
+
+    .appFooter {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+}   
