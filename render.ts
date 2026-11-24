@@ -1,6 +1,7 @@
 // renderTickets(tickets, container)
+import type { Ticket } from './types.ts'
 const STATUSES = ['new', 'doing', 'done']
-export function renderTickets(container, tickets) {
+export function renderTickets(container: HTMLUListElement, tickets: Ticket[]): void {
     container.innerHTML = ''
     for (const t of tickets) {
         const li = document.createElement("li")
