@@ -1,5 +1,5 @@
 import { validateTickets } from './tickets.js'
-import type { Ticket } from './types.ts'
+import type { Ticket } from './types.js'
 // Import ticketów z pliku JSON
 export async function importFromFile(file: File): Promise<Ticket[]> {
     if(!file)
@@ -16,7 +16,7 @@ export async function importFromFile(file: File): Promise<Ticket[]> {
 }
 
 // Import ticketów z adresu URL
-export async function importFromUrl(url: URL): Promise<Ticket[]> {
+export async function importFromUrl(url: string): Promise<Ticket[]> {
     if(!url)
         throw new Error("Nie podano adresu url")
 

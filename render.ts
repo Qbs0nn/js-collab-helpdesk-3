@@ -1,5 +1,5 @@
 // renderTickets(tickets, container)
-import type { Ticket } from './types.ts'
+import type { Ticket } from './types.js'
 const STATUSES = ['new', 'doing', 'done']
 export function renderTickets(container: HTMLUListElement, tickets: Ticket[]): void {
     container.innerHTML = ''

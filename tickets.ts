@@ -5,7 +5,7 @@
 
 // przez to trzeba bedzie zamienic sprawdzanie typu (newId > MAX_TICKETS) na (tickets.length >= MAX_TICKETS)
 // oraz const idS = String(newId) -> bez tego ++
-import type { Ticket } from './types'
+import type { Ticket } from './types.js'
 const MAX_TICKETS: number = 1000
 export function addTicket(tickets: Ticket[], title: string, priority: Ticket["priority"]): Ticket {
     let newId: number = 1

@@ -1,5 +1,5 @@
-import { validateTickets } from './tickets'
-import type { Ticket } from './types'
+import { validateTickets } from './tickets.js'
+import type { Ticket } from './types.js'
 export function loadTickets(): Ticket[] {
     const data: string | null = localStorage.getItem("tickets")
     if (!data) return []
