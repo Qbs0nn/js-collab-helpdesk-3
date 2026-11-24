@@ -5,35 +5,32 @@
 
 // przez to trzeba bedzie zamienic sprawdzanie typu (newId > MAX_TICKETS) na (tickets.length >= MAX_TICKETS)
 // oraz const idS = String(newId) -> bez tego ++
-
-const MAX_TICKETS = 1000
-export function addTicket(tickets,title,priority ) {
-    console.log("tickets:", tickets);
-    console.log("Array?", Array.isArray(tickets));
-    console.log("Type:", typeof tickets);
-    let newId = 1
+import type { Ticket } from './types'
+const MAX_TICKETS: number = 1000
+export function addTicket(tickets: Ticket[], title: string, priority: Ticket["priority"]): Ticket {
+    let newId: number = 1
     while(tickets.some(t => t.id === String(newId))) { newId++ }
-    if(title.length < 3 || title.length > 80)
+    if(title.trim().length < 3 || title.trim().length > 80)
         throw new Error("Tytul nie moze miec mnie niz 3 lub wiecej niz 80 znaków")
     if(tickets.length >= MAX_TICKETS)
         throw new Error("Osiagnieto limit możliwych ticketów")
-    const idS = String(newId)
+    const idS: string = String(newId)
     return { id: idS, title, priority, status: "new"}   
 }
-export function updateTicket(tickets, id, status) {
+export function updateTicket(tickets: Ticket[], id: Ticket["id"], status: Ticket["status"]): Ticket[] {
     return tickets.map(t =>(t.id === id) ? {...t, status} : t); 
 }
-export function filterTicket(tickets, status) {
+export function filterTicket(tickets: Ticket[], status: Ticket["status"] | "all"): Ticket[] {
     if(status == 'all') return tickets;
     return tickets.filter(t => t.status === status);
 }
-export function validateTickets(tickets) {
+export function validateTickets(tickets: unknown): boolean {
     if(!Array.isArray(tickets))
         throw new Error("JSON nie jest tablicą")
     if(tickets.length > MAX_TICKETS)
         throw new Error("Próba dodania zbyt wielkiej ilośći ticketów")
 
-    const idS = new Set()
+    const idS = new Set<string>()
 
     for(const t of tickets) {
         if(!t || typeof t !== 'object' || Array.isArray(t))
