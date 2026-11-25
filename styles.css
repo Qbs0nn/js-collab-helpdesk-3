@@ -352,69 +352,6 @@ select option {
     font-weight: 600;
 }
 
-
-/* ========================================
-   TICKET CARDS
-======================================== */
-
-.helpdeskList {
-    list-style: none;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.helpdeskList li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 14px;
-
-    min-width: 0;
-    padding: 18px 20px;
-
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-    border-radius: 13px;
-
-    box-shadow: 0 2px 5px rgba(52, 57, 47, 0.025);
-
-    transition:
-        border-color 0.2s ease-in-out,
-        box-shadow 0.2s ease-in-out;
-}
-
-.helpdeskList li:hover {
-    border-color: #B7C1AA;
-    box-shadow: 0 3px 12px rgba(52, 57, 47, 0.045);
-}
-
-
-/* ========================================
-   TICKET TITLES
-======================================== */
-
-.helpdeskList li .ticketTitle {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-
-    min-width: 0;
-    overflow: hidden;
-    overflow-wrap: anywhere;
-
-    font-size: 14px;
-    line-height: 1.45;
-    font-weight: 700;
-
-    color: var(--text);
-}
-
-
 /* ========================================
    PRIORITY BADGES
 ======================================== */
@@ -451,39 +388,6 @@ select option {
     color: var(--priority-high-text);
     background: var(--priority-high-bg);
 }
-
-
-/* ========================================
-   TICKET ACTION BUTTONS
-======================================== */
-
-.helpdeskList button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 34px;
-    padding: 0 12px;
-
-    border: 1px solid var(--border);
-    border-radius: 8px;
-
-    background: var(--surface-dark);
-    color: var(--text);
-
-    font-size: 11px;
-    font-weight: 700;
-
-    transition:
-        background 0.2s ease-in-out,
-        border-color 0.2s ease-in-out;
-}
-
-.helpdeskList button:hover {
-    background: var(--matcha-light);
-    border-color: var(--matcha);
-}
-
 
 /* ========================================
    COMPACT IMPORT SECTION
@@ -696,6 +600,198 @@ select option {
     }
 }
 
+/* ========================================
+   TICKET CARDS
+======================================== */
+
+.helpdeskList {
+    list-style: none;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.helpdeskList li {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 1.5fr);
+    align-items: center;
+    gap: 16px;
+
+    min-width: 0;
+    padding: 16px 100px 16px 20px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    box-shadow: 0 2px 5px rgba(52, 57, 47, 0.025);
+
+    transition:
+        border-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out,
+        background 0.2s ease-in-out;
+}
+
+.helpdeskList li:hover {
+    border-color: #B7C1AA;
+    box-shadow: 0 3px 12px rgba(52, 57, 47, 0.045);
+}
+
+/* ========================================
+   TICKET INFO
+======================================== */
+
+.ticketInfo {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.ticketTitle {
+    min-width: 0;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+
+    font-size: 14px;
+    line-height: 1.45;
+    font-weight: 700;
+
+    color: var(--text);
+}
+
+/* ========================================
+   PRIORITY BADGES
+======================================== */
+
+.priorityBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    width: fit-content;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.priorityBadge.low {
+    color: var(--priority-low-text);
+    background: var(--priority-low-bg);
+}
+
+.priorityBadge.medium {
+    color: var(--priority-medium-text);
+    background: var(--priority-medium-bg);
+}
+
+.priorityBadge.high {
+    color: var(--priority-high-text);
+    background: var(--priority-high-bg);
+}
+
+/* ========================================
+   STATUS SELECT
+======================================== */
+
+.helpdeskList .status-select {
+    width: 100%;
+    height: 42px;
+    min-width: 0;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ========================================
+   DELETE BUTTON
+======================================== */
+
+.helpdeskList button.deleteButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 30px;
+    padding: 0 11px;
+
+    border: 1px solid #EAD5CC;
+    border-radius: 8px;
+
+    background: #F5E9E3;
+    color: #A36150;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    transition:
+        background 0.2s ease-in-out,
+        border-color 0.3s ease-in-out,
+        color 0.3s ease-in-out;
+}
+
+.helpdeskList button.deleteButton:hover {
+    background: #EEDBD2;
+    border-color: #D9B6A8;
+    color: #884B3D;
+}
+
+.helpdeskList button.deleteButton:focus-visible {
+    outline: 3px solid rgba(163, 97, 80, 0.2);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   COMPLETED TICKETS
+======================================== */
+
+.helpdeskList li:has(.status-select option[value="done"]:checked) {
+    background: #F7F8F2;
+    border-color: #E0E6D9;
+}
+
+.helpdeskList li:has(.status-select option[value="done"]:checked) .ticketTitle {
+    color: var(--text-muted);
+    text-decoration: line-through;
+    text-decoration-color: #A5AD99;
+}
+
+/* ========================================
+   EMPTY TICKET STATE
+======================================== */
+
+.helpdeskList:empty::before {
+    content: "No tickets yet. You're all caught up.";
+
+    display: block;
+    padding: 30px 20px;
+
+    border: 1px dashed var(--border);
+    border-radius: 13px;
+
+    background: rgba(250, 249, 243, 0.6);
+
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
 
 /* ========================================
    RESPONSIVE: MOBILE
@@ -716,7 +812,8 @@ select option {
     }
 
     .helpdeskList li {
-        padding: 15px;
+        padding: 48px 14px 14px;
+        grid-template-columns: 1fr;
         gap: 10px;
     }
 
@@ -725,30 +822,72 @@ select option {
     }
 }
 
-
 /* ========================================
-   RESPONSIVE: SMALL MOBILE
+   BUTTON INTERACTIONS
 ======================================== */
 
-@media (max-width: 400px) {
-    .helpdeskForm {
-        grid-template-columns: 1fr;
-    }
+.addButton {
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
 
-    .titleField {
-        grid-column: auto;
-    }
+.addButton:hover {
+    background: #505F45;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(80, 95, 69, 0.16);
+}
 
-    .addButton {
-        width: 100%;
-    }
+.addButton:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
 
-    .headerNote {
-        font-size: 8px;
-    }
+/* ========================================
+   TICKET INTERACTIONS
+======================================== */
 
-    .appFooter {
-        gap: 12px;
+.helpdeskList li {
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.helpdeskList li:hover {
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   RESPONSIVE: MOBILE
+======================================== */
+
+@media (max-width: 500px) {
+    .importTool {
         flex-wrap: wrap;
     }
-}   
+
+    .importTool button {
+        width: 104px;
+        min-width: 104px;
+    }
+
+    .importTool input[type="file"] {
+        font-size: 10px;
+    }
+
+    .helpdeskList li {
+        grid-template-columns: 1fr;
+        padding: 48px 14px 14px;
+        gap: 10px;
+    }
+
+    .ticketInfo {
+        gap: 8px;
+    }
+
+    .ticketTitle {
+        font-size: 13px;
+    }
+}

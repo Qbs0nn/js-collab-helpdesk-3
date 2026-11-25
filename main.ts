@@ -1,9 +1,8 @@
 import type { Ticket } from './types.js'
 import { renderTickets } from './render.js';
-import { addTicket, updateTicket, filterTicket } from './tickets.js';
+import { addTicket, updateTicket, filterTicket, deleteTicket } from './tickets.js';
 import { loadTickets, saveTickets } from './storage.js';
 import { importFromCsvFile, importFromFile, importFromUrl } from './import.js';
-
 let tickets: Ticket[] = [];
 let currentFilter: Ticket["status"] | "all" = 'all';
 let importing: boolean = false;
@@ -162,4 +161,19 @@ csvImportBtn.addEventListener('click', async () => {
     }
     handleImport(() => importFromCsvFile(file))
 })
+
+list.addEventListener('click', (e: MouseEvent) => {
+    if (importing) return;
+    if (!(e.target instanceof HTMLButtonElement))
+        return;
+    if (!e.target.classList.contains('deleteButton'))
+        return;
+    const item = e.target.closest('li');
+    if (!item) return;
+    const id = item.dataset.id;
+    if (!id) return;
+    if (!confirm('Czy na pewno chcesz usunąć ten ticket?'))
+        return;
+    saveAndRender(deleteTicket(tickets, id));
+});
 rerender();

@@ -20,6 +20,9 @@ export function addTicket(tickets: Ticket[], title: string, priority: Ticket["pr
 export function updateTicket(tickets: Ticket[], id: Ticket["id"], status: Ticket["status"]): Ticket[] {
     return tickets.map(t =>(t.id === id) ? {...t, status} : t); 
 }
+export function deleteTicket(tickets: Ticket[], id: Ticket["id"]): Ticket[] {
+    return tickets.filter(t => t.id !== id);
+}
 export function filterTicket(tickets: Ticket[], status: Ticket["status"] | "all"): Ticket[] {
     if(status == 'all') return tickets;
     return tickets.filter(t => t.status === status);
